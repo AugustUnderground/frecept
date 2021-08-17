@@ -1,0 +1,18 @@
+package edlab.eda.frecept.Main where
+
+data Opamp2XH035Char = native edlab.eda.characterization.Opamp2XH035Characterization 
+  where
+    pure native build edlab.eda.characterization.Opamp2XH035Characterization.build
+        :: String -> String -> String -> Opamp2XH035Char
+    pure native getRandomValue :: Opamp2XH035Char -> Double -> Double -> Double -> Double
+
+main :: [String] -> IO ()
+main _ = do
+    let op = Opamp2XH035Char.build simDir pdkDir cktDir
+    let rn = Opamp2XH035Char.getRandomValue op 0.0 1.0 0.01
+    println "FRECEPT!"
+    println rn
+  where
+    simDir = "/tmp"
+    pdkDir = "/home/ynk/gonzo/Opt/pdk/x-fab/XKIT/xh035/cadence/v6_6/spectre/v6_6_2/mos"
+    cktDir = "/home/ynk/workspace/analog-circuit-library/src/main/resources"
